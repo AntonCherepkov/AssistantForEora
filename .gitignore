@@ -1,0 +1,5 @@
+/.env
+/venv/
+/result.json
+/llama/
+/all_urls.txt
