@@ -8,3 +8,4 @@ else:
 
 API_GIGACHAT = os.getenv('API_GIGACHAT')
 ID_GIGACHAT = os.getenv('ID_GIGACHAT')
+TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')

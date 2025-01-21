@@ -40,7 +40,7 @@ class CreateQuestForLMM:
                 [
                     result,
                     f"ID проекта: {project['id']}. {project['description']}",
-                    f"Клиент: {project['client']}.",
+                    f"Тема проекта: {project['title']}.",
                     f"Ссылка проекта: {project['links']}"
                 ]
             )

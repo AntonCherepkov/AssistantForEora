@@ -5,8 +5,6 @@ from ..items import ParserItem
 import os
 import re
 
-from loader import g_client
-
 
 try:
     path_file = os.path.abspath('urls.txt')
@@ -44,15 +42,6 @@ class AdvancedSpider(scrapy.Spider):
             'description': response.css('meta[name="description"]::attr(content)').get(),
             'links': response.url
         }
-
-        if project_data['description']:
-            content = (
-                f'Ответь короткой фразой, не называя авторов продукта: только назначение продукта и только название '
-                f'компании, для которой разработали этот продукт: '
-                f'Цель проекта: {project_data["title"]}, пояснение: {project_data["description"]}'
-            )
-            project_data['client'] = g_client.request_llm(user_quest=content)
-            print(f'Ответ AI: {project_data["client"]}')
 
         self.id_project += 1
 

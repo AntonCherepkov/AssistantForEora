@@ -1,14 +1,17 @@
-from scrapy.crawler import CrawlerProcess
-from parser.spiders.advanced_spider import AdvancedSpider
-from scrapy.utils.project import get_project_settings
-
-import logging
-
-def run_spider():
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(AdvancedSpider)
-    process.start()
+from loader import *
+from utils.setting_commands import set_commands
+import asyncio
+from handlers import routers
 
 
-if __name__ == "__main__":
-    run_spider()
+async def main():
+    await set_commands(bot)
+    for router in routers:
+        dp.include_router(router)
+    dp.update.middleware(FileCheckMiddleware())
+
+    await dp.start_polling(bot)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

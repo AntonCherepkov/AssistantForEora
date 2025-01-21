@@ -50,7 +50,7 @@ def similarity_threshold(query: str):
         - Если `relevant_projects` оказывается пустым, функция возвращает None.
     """
     try:
-        with open(os.path.join('..', 'result.json'), 'r', encoding='utf-8') as file:
+        with open(os.path.join('result.json'), 'r', encoding='utf-8') as file:
             data = json.load(file)
 
         document = [
@@ -61,7 +61,7 @@ def similarity_threshold(query: str):
         vectorizer = TfidfVectorizer(stop_words=russian_stopwords)
         tfidf_matrix = vectorizer.fit_transform([query] + document)
         similarity_scores = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
-        # print("Сходства с проектами:", similarity_scores)
+        print("Сходства с проектами:", similarity_scores)
 
         project_scores = pd.DataFrame({
             'id': list(data.keys()),
@@ -78,7 +78,7 @@ def similarity_threshold(query: str):
         return relevant_projects
 
     except FileNotFoundError as e:
-        print(f'Error: {e}')
+        print(f'Обработчик данных не нашел файла с проектами: {e}')
         return
 
 
